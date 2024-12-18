@@ -29,7 +29,7 @@ export const projectsData = [
     description:
       'A desktop application for internship application tracking built with Java and JavaFX. Features include comprehensive test suite using Gradle with over 90% test coverage, helping students manage their internship application process effectively.',
     tags: ['Java', 'JavaFX', 'Gradle', 'JUnit'],
-    imageUrl: '',
+    imageUrl: '/letsgethired.png',
     githubUrl: 'https://github.com/tim-pipi/letsgethired',
     liveUrl: '', 
   },
@@ -56,7 +56,7 @@ export const projectsData = [
 export default function Projects() {
   return (
     <section id="projects" className="scroll-mt-28 mb-28">
-      <h2 className="text-3xl font-bold mb-8 text-center">My Projects</h2>
+      <h2 className="text-3xl font-bold mb-8 text-center">Projects</h2>
       <div className="flex flex-col gap-8">
         {projectsData.map((project, index) => (
           <motion.div
@@ -72,7 +72,7 @@ export default function Projects() {
                   <Image
                     src={project.imageUrl}
                     alt={project.title}
-                    className="object-cover rounded-lg"
+                    className="object-contain w-full h-full rounded-lg"
                     fill
                   />
                 ) : (
