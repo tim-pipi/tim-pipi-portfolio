@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 export default function Intro() {
   return (
@@ -33,7 +33,7 @@ export default function Intro() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <span className="font-bold">Hi there 👋, I'm Timothy.</span> I'm
+        <span className="font-bold">Hi there 👋, Timothy here.</span> I am
         currently a <span className="font-bold">Computer Science Student</span>{' '}
         at <span className="font-bold">National University of Singapore</span>.{' '}
         <br />
