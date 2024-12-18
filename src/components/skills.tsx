@@ -51,7 +51,7 @@ export default function Skills() {
       id="skills"
       className="mb-28 max-w-[53rem] scroll-mt-28 text-center sm:mb-40"
     >
-      <h2 className="text-3xl font-bold mb-8">My Skills</h2>
+      <h2 className="text-3xl font-bold mb-8">Skills</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {skillsData.map((category, categoryIndex) => (
           <motion.div
