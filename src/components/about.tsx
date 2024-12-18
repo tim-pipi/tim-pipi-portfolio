@@ -14,7 +14,7 @@ export default function About() {
     >
       <h2 className="text-3xl font-bold mb-8">About Me</h2>
       <p className="mb-3">
-        I'm currently a Year 3{' '}
+        I am currently a Year 3{' '}
         <span className="font-medium">Computer Science</span> student at{' '}
         <span className="font-medium">National University of Singapore</span>.{' '}
         <br />
@@ -23,16 +23,16 @@ export default function About() {
         <span className="font-medium">Software Engineering</span>.
       </p>
       <p className="mb-3">
-        My programming journey started when I built my first Android app in secondary
-        school. Since then, I've worked on various projects, from{' '}
+        My programming journey started when I built my first Android app in
+        secondary school. Since then, I have worked on various projects, from{' '}
         <span className="font-medium">mobile applications</span> to{' '}
         <span className="font-medium">full-stack web development</span>.
       </p>
       <p>
-        When I'm not coding, you'll find me{' '}
+        When I am not coding, you will find me{' '}
         <span className="font-medium">playing badminton</span>,{' '}
         <span className="font-medium">travelling the world</span>, or{' '}
-        <span className="font-medium">exploring new technologies</span>. I'm
+        <span className="font-medium">exploring new technologies</span>. I am
         always excited to learn new things and take on challenging projects.
       </p>
     </motion.section>

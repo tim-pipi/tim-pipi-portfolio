@@ -25,7 +25,7 @@ export default function Contact() {
       <h2 className="text-3xl font-bold mb-8">Contact</h2>
 
       <p className="text-gray-700 dark:text-gray-300 mb-8">
-        Feel free to reach out to me! I'm always open to discussing new
+        Feel free to reach out to me! I am always open to discussing new
         opportunities and interesting projects.
       </p>
 
