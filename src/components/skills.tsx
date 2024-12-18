@@ -51,14 +51,23 @@ export default function Skills() {
       id="skills"
       className="mb-28 max-w-[53rem] scroll-mt-28 text-center sm:mb-40"
     >
-      <h2 className="text-3xl font-bold mb-8">Skills</h2>
+      <motion.h2 
+        className="text-3xl font-bold mb-8"
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
+        Skills
+      </motion.h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {skillsData.map((category, categoryIndex) => (
           <motion.div
             key={category.category}
             initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 * categoryIndex }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: categoryIndex * 0.2 }}
             className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg"
           >
             <h3 className="text-xl font-semibold mb-4">{category.category}</h3>

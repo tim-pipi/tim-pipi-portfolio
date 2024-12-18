@@ -9,25 +9,31 @@ export default function Contact() {
     <motion.section
       id="contact"
       className="mb-20 sm:mb-28 w-[min(100%,38rem)] text-center"
-      initial={{
-        opacity: 0,
-      }}
-      whileInView={{
-        opacity: 1,
-      }}
-      transition={{
-        duration: 1,
-      }}
-      viewport={{
-        once: true,
-      }}
+      initial={{ opacity: 0, y: 100 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
     >
-      <h2 className="text-3xl font-bold mb-8">Contact</h2>
+      <motion.h2 
+        className="text-3xl font-bold mb-8"
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
+        Contact
+      </motion.h2>
 
-      <p className="text-gray-700 dark:text-gray-300 mb-8">
+      <motion.p 
+        className="text-gray-700 dark:text-gray-300 mb-8"
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
         Feel free to reach out to me! I am always open to discussing new
         opportunities and interesting projects.
-      </p>
+      </motion.p>
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a

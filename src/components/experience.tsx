@@ -39,14 +39,23 @@ export default function Experience() {
       id="experience"
       className="mb-28 max-w-[53rem] scroll-mt-28 text-center sm:mb-40"
     >
-      <h2 className="text-3xl font-bold mb-8">Experience</h2>
+      <motion.h2 
+        className="text-3xl font-bold mb-8"
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
+        Experience
+      </motion.h2>
       <div className="flex flex-col gap-8">
         {experienceData.map((experience, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 * index }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.2 }}
             className="flex flex-col sm:flex-row gap-6 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg text-left"
           >
             <div className="relative w-[100px] h-[100px] flex-shrink-0 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden">

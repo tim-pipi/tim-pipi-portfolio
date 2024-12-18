@@ -56,14 +56,23 @@ export const projectsData = [
 export default function Projects() {
   return (
     <section id="projects" className="scroll-mt-28 mb-28">
-      <h2 className="text-3xl font-bold mb-8 text-center">Projects</h2>
+      <motion.h2 
+        className="text-3xl font-bold mb-8 text-center"
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
+        Projects
+      </motion.h2>
       <div className="flex flex-col gap-8">
         {projectsData.map((project, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.2 }}
             className="group relative bg-gray-100 dark:bg-gray-800 rounded-lg p-4 hover:bg-gray-200 dark:hover:bg-gray-700/50 transition"
           >
             <div className="flex flex-col md:flex-row gap-4">
