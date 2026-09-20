@@ -2,9 +2,11 @@ import Header from '@/components/header';
 import Intro from '@/components/intro';
 import SectionDivider from '@/components/section-divider';
 import About from '@/components/about';
+import Experience from '@/components/experience';
+import Education from '@/components/education';
 import Projects from '@/components/projects';
 import Skills from '@/components/skills';
-import Experience from '@/components/experience';
+import Certifications from '@/components/certifications';
 import Contact from '@/components/contact';
 import Footer from '@/components/footer';
 
@@ -16,8 +18,10 @@ export default function Home() {
       <SectionDivider />
       <About />
       <Experience />
+      <Education />
       <Projects />
       <Skills />
+      <Certifications />
       <Contact />
       <Footer />
     </main>

@@ -33,9 +33,11 @@ export default function Intro() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <span className="font-bold">Hi there 👋, Timothy here.</span> I am
-        currently a <span className="font-bold">Computer Science Student</span>{' '}
-        at <span className="font-bold">National University of Singapore</span>.{' '}
+        <span className="font-bold">Hi there 👋, Timothy here.</span> I am a{' '}
+        <span className="font-bold">Software Engineer</span> at{' '}
+        <span className="font-bold">Rakuten Asia</span>, and a{' '}
+        <span className="font-bold">Computer Science</span> graduate of the{' '}
+        <span className="font-bold">National University of Singapore</span>.{' '}
         <br />
         <br />I enjoy building applications to solve{' '}
         <span className="italic">real-life problems</span>. My current focus is{' '}
@@ -50,7 +52,7 @@ export default function Intro() {
       >
         <a
           className="group bg-gray-900 text-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 transition"
-          href="/contact"
+          href="#contact"
         >
           Contact me here <Mail className="opacity-70" size={20} />
         </a>

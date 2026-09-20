@@ -15,8 +15,9 @@ export default function About() {
     >
       <h2 className="text-3xl font-bold mb-8">About Me</h2>
       <p className="mb-3">
-        I am currently a Year 3{' '}
-        <span className="font-medium">Computer Science</span> student at{' '}
+        I am a <span className="font-medium">Software Engineer</span> at{' '}
+        <span className="font-medium">Rakuten Asia</span> in Singapore, and a{' '}
+        <span className="font-medium">Computer Science</span> graduate of the{' '}
         <span className="font-medium">National University of Singapore</span>.{' '}
         <br />
         My core interests lie in{' '}
@@ -24,10 +25,19 @@ export default function About() {
         <span className="font-medium">Software Engineering</span>.
       </p>
       <p className="mb-3">
+        I am passionate about building solutions for real world problems. I love
+        getting my hands dirty through{' '}
+        <span className="font-medium">hands-on experience</span>, prototyping
+        solutions and improving them through feedback.
+      </p>
+      <p className="mb-3">
         My programming journey started when I built my first Android app in
         secondary school. Since then, I have worked on various projects, from{' '}
         <span className="font-medium">mobile applications</span> to{' '}
-        <span className="font-medium">full-stack web development</span>.
+        <span className="font-medium">full-stack web development</span>, and
+        spent two years as a{' '}
+        <span className="font-medium">Teaching Assistant</span> at NUS across
+        six semesters of programming and software engineering modules.
       </p>
       <p>
         When I am not coding, you will find me{' '}

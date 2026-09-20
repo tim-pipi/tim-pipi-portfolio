@@ -19,7 +19,15 @@ const skillsData = [
   },
   {
     category: 'Frontend Development',
-    skills: ['React', 'HTML/CSS', 'Flutter', 'React Native', 'Tkinter'],
+    skills: [
+      'React',
+      'Next.js',
+      'HTML/CSS',
+      'Flutter',
+      'React Native',
+      'Expo',
+      'Tkinter',
+    ],
   },
   {
     category: 'Backend Development',

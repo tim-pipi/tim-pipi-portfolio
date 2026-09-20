@@ -8,7 +8,7 @@ export default function Contact() {
   return (
     <motion.section
       id="contact"
-      className="mb-20 sm:mb-28 w-[min(100%,38rem)] text-center"
+      className="mb-20 sm:mb-28 w-[min(100%,38rem)] scroll-mt-28 text-center"
       initial={{ opacity: 0, y: 100 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -37,7 +37,7 @@ export default function Contact() {
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a
-          href="mailto:timothyputraprasetio@gmail.com"
+          href="mailto:timothy.prasetio@gmail.com"
           className="group bg-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10"
         >
           <Mail className="opacity-70" size={20} />

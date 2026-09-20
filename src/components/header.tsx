@@ -4,7 +4,15 @@ import React from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const navLinks = ['About', 'Experience', 'Projects', 'Skills', 'Contact'];
+const navLinks = [
+  'About',
+  'Experience',
+  'Education',
+  'Projects',
+  'Skills',
+  'Certifications',
+  'Contact',
+];
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -36,7 +44,7 @@ export default function Header() {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-5 lg:space-x-8">
             {navLinks.map((item, index) => (
               <motion.a
                 key={item}
@@ -45,7 +53,7 @@ export default function Header() {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition cursor-pointer"
+                className="text-sm lg:text-base text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition cursor-pointer"
               >
                 {item}
               </motion.a>
