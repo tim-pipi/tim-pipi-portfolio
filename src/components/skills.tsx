@@ -2,42 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-
-const skillsData = [
-  {
-    category: 'Programming Languages',
-    skills: [
-      'Java',
-      'Python',
-      'C++',
-      'JavaScript',
-      'TypeScript',
-      'Golang',
-      'Dart',
-      'SQL',
-    ],
-  },
-  {
-    category: 'Frontend Development',
-    skills: [
-      'React',
-      'Next.js',
-      'HTML/CSS',
-      'Flutter',
-      'React Native',
-      'Expo',
-      'Tkinter',
-    ],
-  },
-  {
-    category: 'Backend Development',
-    skills: ['Spring Boot', 'Django', 'Firebase', 'MongoDB'],
-  },
-  {
-    category: 'Tools & Infrastructure',
-    skills: ['Git', 'Docker', 'PostgreSQL', 'RabbitMQ', 'WebSocket'],
-  },
-];
+import { skillsData } from '@/data/portfolio';
 
 const fadeInAnimationVariants = {
   initial: {

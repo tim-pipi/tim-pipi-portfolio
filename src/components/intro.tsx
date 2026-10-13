@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail } from 'lucide-react';
+import { profile } from '@/data/portfolio';
 
 export default function Intro() {
   return (
@@ -39,9 +40,9 @@ export default function Intro() {
         <span className="font-bold">Computer Science</span> graduate of the{' '}
         <span className="font-bold">National University of Singapore</span>.{' '}
         <br />
-        <br />I enjoy building applications to solve{' '}
+        <br />I enjoy building systems that solve{' '}
         <span className="italic">real-life problems</span>. My current focus is{' '}
-        <span className="underline">Mobile Development 📱</span>.
+        <span className="underline">backend and real-time data infrastructure 📊</span>.
       </motion.h1>
 
       <motion.div
@@ -59,7 +60,7 @@ export default function Intro() {
 
         <a
           className="group bg-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition border border-black/10 dark:bg-white/10"
-          href="https://linkedin.com/in/timpipi"
+          href={profile.linkedin}
           target="_blank"
         >
           <Linkedin size={20} /> LinkedIn
@@ -67,7 +68,7 @@ export default function Intro() {
 
         <a
           className="group bg-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition border border-black/10 dark:bg-white/10"
-          href="https://github.com/tim-pipi"
+          href={profile.github}
           target="_blank"
         >
           <Github size={20} /> GitHub

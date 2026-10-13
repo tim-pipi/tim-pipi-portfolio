@@ -1,29 +1,31 @@
-import Header from '@/components/header';
-import Intro from '@/components/intro';
-import SectionDivider from '@/components/section-divider';
-import About from '@/components/about';
-import Experience from '@/components/experience';
-import Education from '@/components/education';
-import Projects from '@/components/projects';
-import Skills from '@/components/skills';
-import Certifications from '@/components/certifications';
-import Contact from '@/components/contact';
-import Footer from '@/components/footer';
+import { Archivo, Big_Shoulders_Display, JetBrains_Mono } from 'next/font/google';
+import Range from '@/components/range/range';
+
+const display = Big_Shoulders_Display({
+  variable: '--font-range-display',
+  weight: ['700', '800', '900'],
+  subsets: ['latin'],
+});
+
+const body = Archivo({
+  variable: '--font-range-body',
+  weight: ['400', '500', '600'],
+  subsets: ['latin'],
+});
+
+const mono = JetBrains_Mono({
+  variable: '--font-range-mono',
+  weight: ['400', '600'],
+  subsets: ['latin'],
+});
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center px-4">
-      <Header />
-      <Intro />
-      <SectionDivider />
-      <About />
-      <Experience />
-      <Education />
-      <Projects />
-      <Skills />
-      <Certifications />
-      <Contact />
-      <Footer />
+    <main>
+      <h1 className="sr-only">Timothy Putra Prasetio, Software Engineer</h1>
+      <Range
+        className={`${display.variable} ${body.variable} ${mono.variable}`}
+      />
     </main>
   );
 }

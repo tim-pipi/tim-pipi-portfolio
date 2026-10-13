@@ -22,7 +22,7 @@ _Last updated: 2026-10-13_
 | Portfolio | https://tim-pipi-portfolio.vercel.app/ |
 | Phone | _kept off this file because the repo is public; see the CV_ |
 
-**Focus:** Mobile Development, Software Engineering
+**Focus:** Backend and real-time data infrastructure (Kafka, Apache Pinot, Spring Boot, Kubernetes)
 
 **Top skills (LinkedIn):** Software Engineering Practices · Japanese · Healthcare Information Technology (HIT)
 
@@ -32,42 +32,49 @@ _Last updated: 2026-10-13_
 > I am someone who's passionate about building solutions for real world problems! Love getting my hands dirty through hands-on experience, prototyping solutions and improving them through feedback. Excited to collaborate with like-minded individuals and organizations to create a brighter, more inclusive future through technology!
 
 **Long (website About section):**
-- Software Engineer at Rakuten Asia in Singapore, and a Computer Science graduate of the National University of Singapore. Core interests: Mobile Development and Software Engineering.
+- Software Engineer at Rakuten Asia in Singapore, and a Computer Science graduate of the National University of Singapore (Highest Distinction, ASEAN Undergraduate Scholar). Works on backend and real-time data infrastructure with Kafka, Apache Pinot, Spring Boot and Kubernetes.
 - Passionate about building solutions for real world problems; loves hands-on experience, prototyping solutions and improving them through feedback.
 - Programming journey started by building a first Android app in secondary school. Since then: mobile applications, full-stack web development, and two years as a Teaching Assistant at NUS across six semesters of programming and software engineering modules.
-- Outside coding: playing badminton, travelling the world, exploring new technologies.
+- Outside coding: playing badminton, playing guitar, travelling the world, exploring new technologies.
 
-_Appears on: website (`intro.tsx`, `about.tsx`), LinkedIn_
+**Range About section** (`range/dossier-body.tsx`): works in Rakuten Asia's Global Advertisement Tech department on backend and real-time data infrastructure. Interests: distributed systems, data and platform engineering, SRE. Off the clock: badminton, fingerstyle guitar, drawing, travelling, learning Japanese, skydiving and roller coasters. Originally from Surabaya, Indonesia.
+
+_Appears on: website (classic `intro.tsx`, `about.tsx`; range About), LinkedIn_
 
 ---
 
 ## Experience
 
 ### Software Engineer — Rakuten Asia
+- **Department:** Global Advertisement Tech
 - **Dates:** Jul 2026 – Present
 - **Location:** Singapore
 - **Highlights:**
-  - _TODO_
-- **Technologies:** _TODO_
-- _Appears on: website, LinkedIn_
+  - Develop and maintain the database service storing all item and shop data for Rakuten's ad platform, backing ad serving at millions of events per day across the Rakuten ecosystem
+  - Cut Google Cloud Storage costs by 67%, from ~US$1,200 to ~US$400 per day (~US$290K/year saved), by implementing data retention policies, storage-class tiering and automated cleanup of stale data
+- **Technologies:** _not listed on the CV_
+- _Appears on: website, CV_
 
 ### Software Engineer Intern — Rakuten Asia
 - **Dates:** May 2025 – Jul 2026
 - **Location:** Singapore
 - **Highlights:**
-  - _TODO_
-- **Technologies:** _TODO_
-- _Appears on: website, LinkedIn_
+  - Built a real-time KPI anomaly-detection pipeline (Kafka → Apache Pinot → ThirdEye) monitoring the full ad funnel (requests, impressions, clicks, add-to-cart, conversions and ad sales), cutting time-to-detect for metric drops from hours to minutes
+  - Developed a Next.js + Spring Boot monitoring dashboard for managers and engineers, replacing ad-hoc queries
+  - Extended the system with a conversational AI assistant (n8n workflows + Pinot MCP server) that lets non-engineers query ad performance and generate reports in natural language
+  - Received a full-time return offer and converted to Software Engineer on the same team
+- **Technologies:** Kafka, Apache Pinot, ThirdEye, Next.js, Spring Boot, n8n, MCP
+- _Appears on: website, CV_
 
 ### Software Engineer Intern — CareSense.ai
 - **Dates:** Oct 2024 – May 2025
 - **Location:** Singapore
 - **Highlights:**
-  - Developed a mobile application with Expo to improve healthcare through the help of an intelligent automated health coach
-  - Led Android development for the healthcare application, implementing secure authentication and health data integration using Google APIs
-- **Technologies:** React Native, Expo, Google APIs (Login, Fit, Health Connect), Android Development
+  - Led Android development of a healthcare app with ~200 paying users, implementing secure Google OAuth sign-in and health-data sync via Google Fit and Health Connect
+  - Built React Native (Expo) features integrating the app's AI health coach
+- **Technologies:** React Native, Expo, Google APIs (OAuth, Fit, Health Connect), Android Development
 - **Image:** `/caresenseai.jpg`
-- _Appears on: website, LinkedIn (first bullet only)_
+- _Appears on: website, CV, LinkedIn (older wording, first bullet only)_
 
 ### Teaching Assistant — National University of Singapore
 - **Dates:** Aug 2023 – May 2025
@@ -84,17 +91,26 @@ _Appears on: website (`intro.tsx`, `about.tsx`), LinkedIn_
 - **Recognition:** Honour List of Student Tutors
 - _Appears on: website, LinkedIn_
 
-### Full Stack Developer Intern — HomePal
-- **Dates:** Aug 2023 – Feb 2025
+### Full-stack Developer Intern (Part-time) — HomePal Technologies
+- **Dates:** Aug 2023 – Dec 2024
 - **Location:** Singapore
 - **Highlights:**
-  - Built a mobile application using Flutter and Firebase to notify users of AI-detected falls, improving real-time alert efficiency for elderly care
-  - Designed and developed a GUI using Tkinter for Raspberry Pi, streamlining data interaction for machine learning model training, resulting in a 300% increase in processing speed
-  - Extended accessibility of Raspberry Pi's GUI by implementing a cross-platform web-based application using Python Dash, enhancing usability for diverse platforms
-  - Collaborated with cross-functional teams to integrate AI algorithms into applications, enhancing the reliability and accuracy of fall detection systems
-- **Technologies:** Flutter, Firebase, Tkinter, Dash
+  - Built an AI-enabled fall-detection app (Flutter, Django) with Firebase real-time alerts for elderly-care monitoring, deployed across 2 nursing homes
+  - Built Raspberry Pi tooling (Tkinter, Dash) for ML training-data preparation, cutting processing time from ~12h to ~4h (3× faster)
+- **Technologies:** Flutter, Django, Firebase, Tkinter, Dash
 - **Image:** `/homepal.jpg`
-- _Appears on: website, LinkedIn_
+- _Appears on: website, CV, LinkedIn (older wording: "Full Stack Developer Intern — HomePal", Aug 2023 – Feb 2025)_
+
+---
+
+## Leadership
+
+| Role | Organisation | Dates | Details | Appears on |
+| --- | --- | --- | --- | --- |
+| Vice President | NUS Guitar Ensemble | Apr 2023 – Apr 2024 | Led a 10-member executive committee; managed a $20,000 budget for concerts reaching 500+ attendees | website, CV |
+| House Captain | NUS College | Aug 2022 – Aug 2023 | Ran 10 welfare initiatives for 150 residents | website, CV |
+| Residential Assistant | NUS College | — | — | website |
+| Team Captain | NUSC Valorant interest group (NUSChooChoo) | — | — | website |
 
 ---
 
@@ -102,23 +118,42 @@ _Appears on: website (`intro.tsx`, `about.tsx`), LinkedIn_
 
 | Institution | Qualification | Dates | Appears on |
 | --- | --- | --- | --- |
-| National University of Singapore | Bachelor of Computing in Computer Science | Aug 2022 – May 2026 | website, LinkedIn |
+| National University of Singapore | Bachelor of Computing (Honours) in Computer Science, Highest Distinction · GPA 4.55 / 5.00 · ASEAN Undergraduate Scholarship (full ride) | Aug 2022 – May 2026 | website, CV, LinkedIn (degree name only) |
 | NUS College | Bachelor's Degree | Aug 2022 – Aug 2026 | website, LinkedIn |
 | Anglo-Chinese School (Independent) | International Baccalaureate | Feb 2020 – Nov 2021 | website, LinkedIn |
 | Anglo-Chinese School (Independent) | Integrated Programme | 2018 – 2019 | LinkedIn |
 | SMP Kristen Petra 1 | — | 2014 – 2016 | LinkedIn |
 
+**Selected coursework** (website): CS3230 Algorithm design and NP-completeness · CS4222 IoT and wireless networking on CC2650 SensorTags with Contiki-NG · CS4225 Big data with PySpark
+
 ---
 
 ## Projects
 
+### rizzedin.com
+An AI-powered matching platform for tech professionals, built at CursorHackSG 2025 and placed in the top 15 of ~500 participants.
+- **Tech:** LinkedIn OAuth, Groq, Exa AI, Convex
+- **Code:** —
+- **Live:** https://rizzedin.com _(unconfirmed)_
+- _Appears on: website, CV_
+
+### Badminton Finder _(building)_
+Reads game listings from Telegram groups and turns them into a searchable web app, so you can search for a game instead of scrolling chats.
+- **Tech:** Next.js, Supabase, Python, Telethon
+- _Appears on: website_
+
+### VCNet (publication)
+**The Geometry of Cortical Computation: Manifold Disentanglement and Predictive Dynamics in VCNet.** B. A. Hill, X. Zhang, T. P. Prasetio. arXiv:2508.02995, 2025.
+- **Paper:** https://arxiv.org/abs/2508.02995
+- _Appears on: website, CV_
+
 ### PeerPrep
-A collaborative coding platform designed for technical interview preparation, featuring real-time pair programming capabilities, video communication, and LeetCode-style coding problems. The platform includes a WebSocket-based pair programming system, question management interface, and user progress tracking system.
+A collaborative technical-interview platform (Aug – Nov 2024): containerised microservices for real-time pair programming with video calls, with WebSocket-based collaborative editing and RabbitMQ for matchmaking and inter-service messaging.
 - **Tech:** React, TypeScript, Java Spring Boot, MongoDB, Docker, WebSocket, RabbitMQ, shadcn/ui
 - **Code:** https://github.com/tim-pipi/peerprep
 - **Live:** —
 - **Image:** `/peerprep.png`
-- _Appears on: website_
+- _Appears on: website, CV_
 
 ### LetsGetHired
 A desktop application for internship application tracking built with Java and JavaFX. Features include a comprehensive test suite using Gradle with over 90% test coverage, helping students manage their internship application process effectively.
@@ -137,27 +172,30 @@ A web application enabling medical clerks to manage patient data and diagnoses. 
 - _Appears on: website_
 
 ### This Portfolio
-A portfolio website built with Next.js, Tailwind CSS, and Framer Motion, showcasing projects, skills, and experiences in a clean and modern design.
-- **Tech:** Next.js, Tailwind CSS, Framer Motion
+A portfolio website built with Next.js, Tailwind CSS, and Framer Motion. Visitors give their name on a landing page, then enter an aim-trainer homepage drawn on a canvas, where each target bot opens a section and clearing all five posts a time to a shared leaderboard; a classic scrolling version sits alongside it.
+- **Tech:** Next.js, Canvas, Tailwind CSS, Framer Motion, Upstash Redis
 - **Code:** https://github.com/tim-pipi/tim-pipi-portfolio
 - **Live:** https://tim-pipi-portfolio.vercel.app/
 - **Image:** `/portfolio.png`
 - _Appears on: website_
 
+**On the bench** (website): a bill-splitting tracker for housemates sharing rent and utilities; a pixel-art inventory of things I own that grows into a small life sim.
+
 ---
 
 ## Skills
 
-| Category | Skills |
-| --- | --- |
-| Programming Languages | Java, Python, C++, JavaScript, TypeScript, Golang, Dart, SQL |
-| Frontend Development | React, Next.js, HTML/CSS, Flutter, React Native, Expo, Tkinter |
-| Backend Development | Spring Boot, Django, Firebase, MongoDB |
-| Tools & Infrastructure | Git, Docker, PostgreSQL, RabbitMQ, WebSocket |
-| Languages | Japanese (Intermediate) |
-| Domains | Healthcare Information Technology (HIT) |
+| Category | Skills | Range slot |
+| --- | --- | --- |
+| Languages | Java, Python, TypeScript, JavaScript, SQL, C++ | Primary |
+| Data & Infrastructure | Kafka, Apache Pinot, ThirdEye, Docker, Kubernetes, Jenkins, RabbitMQ, WebSocket | Heavy |
+| Backend | Spring Boot, Django, PostgreSQL, MongoDB, Firebase, REST APIs | Secondary |
+| Frontend & Mobile | React, Next.js, Flutter, React Native | Sidearm |
+| AI Tooling | n8n, Model Context Protocol (MCP), LLM APIs | Ultimate |
+| Spoken languages | Japanese (Intermediate) | — |
+| Domains | Healthcare Information Technology (HIT) | — |
 
-_Appears on: website (top four rows), LinkedIn (Japanese, HIT, Software Engineering Practices)_
+_Appears on: website and CV (first five rows), LinkedIn (Japanese, HIT, Software Engineering Practices). Previously on the website but dropped to match the CV: Golang, Dart, HTML/CSS, Expo, Tkinter, Git._
 
 ---
 
@@ -177,13 +215,15 @@ _Appears on: website, LinkedIn_
 
 | Format | Location | How to update |
 | --- | --- | --- |
-| Website | `src/components/*.tsx` | Edit the data arrays: `experienceData`, `projectsData`, `skillsData`, `educationData`, `certificationsData`; prose in `intro.tsx`, `about.tsx`, `contact.tsx` |
-| CV | `public/CV.pdf` | Regenerate from this file and replace the PDF |
+| Website | `src/data/portfolio.ts` (shared by the range at `/` and the classic page at `/classic`) | Edit the data there; prose in `intro.tsx`, `about.tsx`, `contact.tsx` and `range/dossier-body.tsx` |
+| CV | `Timothy_Prasetio_CV.md` → `public/CV.pdf` | Update the markdown from this file, regenerate the PDF and replace `public/CV.pdf` |
 | LinkedIn | https://linkedin.com/in/timpipi | Edit manually; export with "Save to PDF" to check it against this file |
 
 ## Open items
 
-- [ ] Write highlights and technologies for both Rakuten Asia roles (both are blank on the website too)
-- [ ] The website's "This Portfolio" project links to `github.com/tim-pipi/portfolio`, but this repo is `tim-pipi/tim-pipi-portfolio`. Check which one is correct
+- [x] Write highlights and technologies for both Rakuten Asia roles (filled from the CV; the full-time role still has no technologies line)
+- [x] The website's "This Portfolio" project now links to `github.com/tim-pipi/tim-pipi-portfolio` (this repo)
 - [ ] Add a CareSense.ai bullet about Android development and the technologies to LinkedIn
-- [ ] Check that `public/CV.pdf` matches this file
+- [ ] Check that `public/CV.pdf` matches this file (it predates `Timothy_Prasetio_CV.md`)
+- [ ] Confirm https://rizzedin.com is live
+- [ ] Update LinkedIn experience wording to match the CV (Rakuten, CareSense, HomePal)

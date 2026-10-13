@@ -4,54 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Github, Link, Code2 } from 'lucide-react';
-
-export const projectsData = [
-  {
-    title: 'PeerPrep',
-    description:
-      'A collaborative coding platform designed for technical interview preparation, featuring real-time pair programming capabilities, video communication, and LeetCode-style coding problems. The platform includes a WebSocket-based pair programming system, question management interface, and user progress tracking system.',
-    tags: [
-      'React',
-      'TypeScript',
-      'Java Spring Boot',
-      'MongoDB',
-      'Docker',
-      'WebSocket',
-      'RabbitMQ',
-      'shadcn/ui',
-    ],
-    imageUrl: '/peerprep.png',
-    githubUrl: 'https://github.com/tim-pipi/peerprep',
-    liveUrl: '',
-  },
-  {
-    title: 'LetsGetHired',
-    description:
-      'A desktop application for internship application tracking built with Java and JavaFX. Features include comprehensive test suite using Gradle with over 90% test coverage, helping students manage their internship application process effectively.',
-    tags: ['Java', 'JavaFX', 'Gradle', 'JUnit'],
-    imageUrl: '/letsgethired.png',
-    githubUrl: 'https://github.com/tim-pipi/letsgethired',
-    liveUrl: '', 
-  },
-  {
-    title: 'Public Health Screening Application',
-    description:
-      'A web application enabling medical clerks to manage patient data and diagnoses. Features responsive UI components built with React and seamless integration with MongoDB backend for efficient data management.',
-    tags: ['JavaScript', 'React', 'MongoDB'],
-    imageUrl: '',
-    githubUrl: 'https://github.com/tim-pipi/phs-app',
-    liveUrl: '',
-  },
-  {
-    title: 'This Portfolio',
-    description:
-      'This portfolio website is built with Next.js, Tailwind CSS, and Framer Motion. It showcases my projects, skills, and experiences in a clean and modern design.',
-    tags: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
-    imageUrl: '/portfolio.png',
-    githubUrl: 'https://github.com/tim-pipi/portfolio',
-    liveUrl: '',
-  },
-];
+import { projectsData } from '@/data/portfolio';
 
 export default function Projects() {
   return (
@@ -92,6 +45,11 @@ export default function Projects() {
               </div>
               <div className="flex-1">
                 <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
+                {project.badge && (
+                  <p className="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">
+                    {project.badge}
+                  </p>
+                )}
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
                   {project.description}
                 </p>
@@ -106,14 +64,16 @@ export default function Projects() {
                   ))}
                 </ul>
                 <div className="flex gap-4">
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    className="flex items-center gap-2 hover:text-gray-950 dark:hover:text-gray-200"
-                  >
-                    <Github size={20} />
-                    Code
-                  </a>
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      className="flex items-center gap-2 hover:text-gray-950 dark:hover:text-gray-200"
+                    >
+                      <Github size={20} />
+                      Code
+                    </a>
+                  )}
                   {project.liveUrl && (
                     <a
                       href={project.liveUrl}
@@ -121,7 +81,7 @@ export default function Projects() {
                       className="flex items-center gap-2 hover:text-gray-950 dark:hover:text-gray-200"
                     >
                       <Link size={20} />
-                      Live Demo
+                      {project.liveLabel ?? 'Live Demo'}
                     </a>
                   )}
                 </div>

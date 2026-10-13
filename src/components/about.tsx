@@ -18,11 +18,12 @@ export default function About() {
         I am a <span className="font-medium">Software Engineer</span> at{' '}
         <span className="font-medium">Rakuten Asia</span> in Singapore, and a{' '}
         <span className="font-medium">Computer Science</span> graduate of the{' '}
-        <span className="font-medium">National University of Singapore</span>.{' '}
-        <br />
-        My core interests lie in{' '}
-        <span className="font-medium">Mobile Development</span> and{' '}
-        <span className="font-medium">Software Engineering</span>.
+        <span className="font-medium">National University of Singapore</span>{' '}
+        (<span className="font-medium">Highest Distinction</span>, ASEAN
+        Undergraduate Scholar). <br />
+        I work on{' '}
+        <span className="font-medium">backend and real-time data infrastructure</span>{' '}
+        with Kafka, Apache Pinot, Spring Boot and Kubernetes.
       </p>
       <p className="mb-3">
         I am passionate about building solutions for real world problems. I love
@@ -42,6 +43,7 @@ export default function About() {
       <p>
         When I am not coding, you will find me{' '}
         <span className="font-medium">playing badminton</span>,{' '}
+        <span className="font-medium">playing guitar</span>,{' '}
         <span className="font-medium">travelling the world</span>, or{' '}
         <span className="font-medium">exploring new technologies</span>. I am
         always excited to learn new things and take on challenging projects.
