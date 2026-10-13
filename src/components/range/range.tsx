@@ -10,12 +10,17 @@ import {
   XCOLORS,
   XDEF,
   createRange,
+  emptyRun,
   type BotId,
   type Crosshair,
   type Hud,
   type KillMeta,
   type RangeController,
+  type Run,
 } from './engine';
+import Landing from './landing';
+import { Leaderboard, Results, submitRun, type Submission } from './leaderboard';
+import { loadPlayer, savePlayer, type Player } from './player';
 import s from './range.module.css';
 
 const store = {
@@ -41,6 +46,7 @@ const isBotId = (v: string): v is BotId => BOT_DEFS.some((b) => b.id === v);
 const labelOf = (id: BotId) => BOT_DEFS.find((b) => b.id === id)!.label;
 
 type FeedItem = { key: number; id: BotId; head: boolean };
+type Stage = 'landing' | 'leaving' | 'range';
 
 export default function Range({ className = '' }: { className?: string }) {
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
@@ -49,6 +55,10 @@ export default function Range({ className = '' }: { className?: string }) {
   const dossierRef = React.useRef<HTMLElement>(null);
   const ctrlRef = React.useRef<RangeController | null>(null);
   const returnFocusRef = React.useRef<HTMLElement | null>(null);
+  const timerRef = React.useRef<HTMLSpanElement>(null);
+  // Set when the last bot of a run falls; the results card shows once that
+  // bot's section is closed.
+  const pendingResultsRef = React.useRef(false);
 
   const [hud, setHud] = React.useState<Hud>({
     shots: 0,
@@ -66,11 +76,28 @@ export default function Range({ className = '' }: { className?: string }) {
   const [sfxOn, setSfxOn] = React.useState(false);
   const [coarse, setCoarse] = React.useState(false);
   const [hintGone, setHintGone] = React.useState(false);
+  const [stage, setStage] = React.useState<Stage>('landing');
+  const [player, setPlayer] = React.useState<Player | null>(null);
+  const [run, setRun] = React.useState<Run>(emptyRun);
+  const [submission, setSubmission] = React.useState<Submission>({ state: 'idle' });
+  const [resultsOpen, setResultsOpen] = React.useState(false);
+  const [lbOpen, setLbOpen] = React.useState(false);
+  const [lbRefresh, setLbRefresh] = React.useState(0);
+  const playerRef = React.useRef(player);
+  playerRef.current = player;
 
   const xcRef = React.useRef(xc);
   const sfxRef = React.useRef(sfxOn);
   xcRef.current = xc;
   sfxRef.current = sfxOn;
+
+  const post = React.useCallback((who: Player, finished: Run) => {
+    setSubmission({ state: 'posting' });
+    submitRun(who, finished).then((result) => {
+      setSubmission(result);
+      setLbRefresh((n) => n + 1);
+    });
+  }, []);
 
   const openSection = React.useCallback((id: BotId, meta: KillMeta) => {
     setOpen({ id, meta });
@@ -87,12 +114,22 @@ export default function Range({ className = '' }: { className?: string }) {
     setXc({ ...XDEF, ...store.get<Partial<Crosshair>>('range.xhair', {}) });
     setSfxOn(store.get('range.sfx', false));
     setCoarse(matchMedia('(pointer: coarse)').matches);
+    setPlayer(loadPlayer());
 
     let feedKey = 0;
     const timers: ReturnType<typeof setTimeout>[] = [];
     const ctrl = createRange(canvasRef.current!, {
       reloadBar: reloadRef.current!,
+      timerEl: timerRef.current!,
       onHud: setHud,
+      onRun: (next) => {
+        setRun(next);
+        if (next.status !== 'finished') return;
+        pendingResultsRef.current = true;
+        const who = playerRef.current;
+        if (!next.assisted && who) post(who, next);
+        else setSubmission({ state: 'idle' });
+      },
       onKill: (id, meta) => {
         const key = ++feedKey;
         setFeed((f) => [{ key, id, head: meta.part === 'head' }, ...f].slice(0, 4));
@@ -107,9 +144,10 @@ export default function Range({ className = '' }: { className?: string }) {
     });
     ctrlRef.current = ctrl;
 
-    // Deep link: /#about, /#projects, …
+    // Deep link: /#about, /#projects, … skips the landing page.
     const start = location.hash.slice(1);
     if (isBotId(start)) {
+      setStage('range');
       timers.push(
         setTimeout(() => {
           setHintGone(true);
@@ -123,7 +161,37 @@ export default function Range({ className = '' }: { className?: string }) {
       ctrl.destroy();
       ctrlRef.current = null;
     };
-  }, [openSection]);
+  }, [openSection, post]);
+
+  // The range only takes shots when nothing is covering it.
+  React.useEffect(() => {
+    ctrlRef.current?.setActive(stage === 'range' && !resultsOpen && !lbOpen);
+  }, [stage, resultsOpen, lbOpen]);
+
+  const enterRange = (name: string | null) => {
+    if (name) setPlayer(savePlayer(name, player));
+    setStage('leaving');
+    const fade = matchMedia('(prefers-reduced-motion: reduce)').matches ? 200 : 550;
+    setTimeout(() => setStage('range'), fade);
+  };
+
+  const setNameFromResults = (name: string) => {
+    const who = savePlayer(name, player);
+    setPlayer(who);
+    if (run.status === 'finished' && !run.assisted) post(who, run);
+  };
+
+  const runAgain = () => {
+    setResultsOpen(false);
+    setSubmission({ state: 'idle' });
+    ctrlRef.current?.resetRun();
+  };
+
+  const openBoard = React.useCallback(() => {
+    setResultsOpen(false);
+    setXOpen(false);
+    setLbOpen(true);
+  }, []);
 
   const updateXc = (patch: Partial<Crosshair>) => {
     setXc((cur) => {
@@ -158,27 +226,35 @@ export default function Range({ className = '' }: { className?: string }) {
     } catch {
       // ignore
     }
+    if (pendingResultsRef.current) {
+      pendingResultsRef.current = false;
+      setResultsOpen(true);
+    }
   }, [open]);
 
-  // Keyboard: 1–5 flick, R reload, C crosshair, Esc close
+  // Keyboard: 1–5 flick, R reload, C crosshair, L leaderboard, Esc close
   React.useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (stage !== 'range') return;
       if (e.key === 'Escape') {
         if (xOpen) setXOpen(false);
+        else if (lbOpen) setLbOpen(false);
+        else if (resultsOpen) setResultsOpen(false);
         else closePanel();
         return;
       }
-      if (open || e.metaKey || e.ctrlKey || e.altKey) return;
+      if (open || resultsOpen || lbOpen || e.metaKey || e.ctrlKey || e.altKey) return;
       if ((e.target as HTMLElement).matches?.('input')) return;
       const bot = BOT_DEFS.find((b) => b.key === e.key);
       if (bot) {
         flickTo(bot.id, document.querySelector(`[data-bot="${bot.id}"]`));
       } else if (e.key === 'r' || e.key === 'R') ctrlRef.current?.startReload();
       else if (e.key === 'c' || e.key === 'C') setXOpen((v) => !v);
+      else if (e.key === 'l' || e.key === 'L') openBoard();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [open, xOpen, closePanel, flickTo]);
+  }, [stage, open, xOpen, resultsOpen, lbOpen, closePanel, flickTo, openBoard]);
 
   // Close the crosshair panel when the player starts shooting again
   React.useEffect(() => {
@@ -222,7 +298,22 @@ export default function Range({ className = '' }: { className?: string }) {
         aria-label="A shooting range with five target bots. Each bot opens a section of Tim's portfolio. Use the section buttons at the bottom, or keys 1 to 5."
       />
 
-      <div className={s.hud}>
+      <div className={s.hud} inert={stage !== 'range'}>
+        <div className={s.runbox} aria-hidden="true">
+          <span className={s.statKey}>
+            {run.status === 'idle' ? 'Time trial' : run.status === 'finished' ? 'Final' : 'Run'}
+          </span>
+          <span className={s.runTime}>
+            <span ref={timerRef}>0.00</span>s
+          </span>
+          <span className={s.pips}>
+            {BOT_DEFS.map((b) => (
+              <i key={b.id} data-on={run.cleared.includes(b.id) || undefined} />
+            ))}
+          </span>
+          {run.status === 'idle' && <span className={s.runHint}>first shot starts the clock</span>}
+          {run.assisted && run.status !== 'idle' && <span className={s.runHint}>assisted</span>}
+        </div>
         <div className={s.stats} aria-hidden="true">
           {[
             ['Shots', hud.shots],
@@ -242,6 +333,9 @@ export default function Range({ className = '' }: { className?: string }) {
             <Link className={s.tool} href="/classic">
               Classic<span className={s.wide}>&nbsp;view</span>
             </Link>
+            <button className={s.tool} aria-expanded={lbOpen} onClick={openBoard}>
+              Leaderboard <kbd className={s.wide}>L</kbd>
+            </button>
             <button className={s.tool} aria-pressed={sfxOn} onClick={toggleSfx}>
               {sfxOn ? 'Sound on' : 'Sound off'}
             </button>
@@ -257,7 +351,7 @@ export default function Range({ className = '' }: { className?: string }) {
           <ol className={s.feed} aria-live="polite">
             {feed.map((item) => (
               <li key={item.key}>
-                <span className={s.who}>{profile.shortName}</span>
+                <span className={s.who}>{player?.name ?? 'You'}</span>
                 <svg viewBox="0 0 16 16" aria-hidden="true">
                   <circle cx="8" cy="8" r="5" />
                   <path d="M8 1v4M8 11v4M1 8h4M11 8h4" />
@@ -329,9 +423,9 @@ export default function Range({ className = '' }: { className?: string }) {
         </div>
 
         <div className={s.player} aria-hidden="true">
-          <div className={s.pName}>{profile.shortName.toUpperCase()}</div>
+          <div className={s.pName}>{(player?.name ?? 'Guest').toUpperCase()}</div>
           <div className={s.pRole}>
-            {profile.role} · {profile.company}
+            Visiting {profile.shortName}&apos;s range
           </div>
           <div className={s.hp}>
             <span className={s.hpNum}>100</span>
@@ -381,6 +475,31 @@ export default function Range({ className = '' }: { className?: string }) {
           </div>
         </div>
       </div>
+
+      {resultsOpen && (
+        <>
+          <div className={s.scrim} onClick={() => setResultsOpen(false)} />
+          <Results
+            run={run}
+            player={player}
+            submission={submission}
+            onSetName={setNameFromResults}
+            onAgain={runAgain}
+            onBoard={openBoard}
+          />
+        </>
+      )}
+
+      {lbOpen && (
+        <>
+          <div className={s.scrim} onClick={() => setLbOpen(false)} />
+          <Leaderboard player={player} refreshKey={lbRefresh} onClose={() => setLbOpen(false)} />
+        </>
+      )}
+
+      {stage !== 'range' && (
+        <Landing player={player} onEnter={enterRange} leaving={stage === 'leaving'} />
+      )}
 
       {open && (
         <>

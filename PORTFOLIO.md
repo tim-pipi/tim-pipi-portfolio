@@ -172,8 +172,8 @@ A web application enabling medical clerks to manage patient data and diagnoses. 
 - _Appears on: website_
 
 ### This Portfolio
-A portfolio website built with Next.js, Tailwind CSS, and Framer Motion. The homepage is an aim trainer drawn on a canvas, where each target bot opens a section; a classic scrolling version sits alongside it.
-- **Tech:** Next.js, Canvas, Tailwind CSS, Framer Motion
+A portfolio website built with Next.js, Tailwind CSS, and Framer Motion. Visitors give their name on a landing page, then enter an aim-trainer homepage drawn on a canvas, where each target bot opens a section and clearing all five posts a time to a shared leaderboard; a classic scrolling version sits alongside it.
+- **Tech:** Next.js, Canvas, Tailwind CSS, Framer Motion, Upstash Redis
 - **Code:** https://github.com/tim-pipi/tim-pipi-portfolio
 - **Live:** https://tim-pipi-portfolio.vercel.app/
 - **Image:** `/portfolio.png`

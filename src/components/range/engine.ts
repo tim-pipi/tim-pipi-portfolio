@@ -14,6 +14,31 @@ export type Hud = {
   down: BotId[];
 };
 
+// A time-trial run: starts on the first shot, ends once all five bots have
+// been taken down. The clock pauses while a section is open.
+export type Run = {
+  status: 'idle' | 'running' | 'finished';
+  elapsedMs: number;
+  cleared: BotId[];
+  shots: number;
+  hits: number;
+  hs: number;
+  // Keyboard / button flicks auto-aim, so runs that use them aren't ranked.
+  assisted: boolean;
+};
+
+export const emptyRun = (): Run => ({
+  status: 'idle',
+  elapsedMs: 0,
+  cleared: [],
+  shots: 0,
+  hits: 0,
+  hs: 0,
+  assisted: false,
+});
+
+export const formatTime = (ms: number) => (ms / 1000).toFixed(2);
+
 export type Crosshair = {
   color: string;
   len: number;
@@ -44,6 +69,8 @@ export const BOT_DEFS: { id: BotId; label: string; key: string }[] = [
 
 type Options = {
   reloadBar: HTMLElement;
+  timerEl: HTMLElement;
+  onRun: (run: Run) => void;
   onHud: (hud: Hud) => void;
   onKill: (id: BotId, meta: KillMeta) => void;
   getCrosshair: () => Crosshair;
@@ -57,6 +84,9 @@ export type RangeController = {
   knockDown: (id: BotId) => KillMeta;
   // Respawns the bot whose section was open and re-enables firing.
   close: () => void;
+  // While inactive (e.g. behind the landing page) the range can't be shot.
+  setActive: (active: boolean) => void;
+  resetRun: () => void;
   playSfx: (kind: SfxKind) => void;
   destroy: () => void;
 };
@@ -250,7 +280,13 @@ export function createRange(cv: HTMLCanvasElement, o: Options): RangeController 
   let flick: { b: Bot; sx: number; sy: number; t: number; dur: number } | null =
     null;
   let openId: BotId | null = null;
+  let active = true;
   const stats = { shots: 0, hits: 0, hs: 0 };
+  let run = emptyRun();
+  const emitRun = () => o.onRun({ ...run, cleared: [...run.cleared] });
+  const showTime = () => {
+    o.timerEl.textContent = formatTime(run.elapsedMs);
+  };
   const decals: { x: number; y: number; z: number; life: number }[] = [];
   const marks: { x: number; y: number; life: number; kill: boolean; miss: boolean }[] =
     [];
@@ -302,8 +338,15 @@ export function createRange(cv: HTMLCanvasElement, o: Options): RangeController 
       startReload();
       return;
     }
+    if (run.status !== 'running') {
+      run = emptyRun();
+      run.status = 'running';
+      showTime();
+      emitRun();
+    }
     ammo--;
     stats.shots++;
+    run.shots++;
     let sx = px;
     let sy = py;
     if (!forced && bloom > 1.5) {
@@ -318,11 +361,14 @@ export function createRange(cv: HTMLCanvasElement, o: Options): RangeController 
     const h = forced ? { bot: forced, part: 'head' as HitPart } : hitTest(sx, sy);
     if (h) {
       stats.hits++;
+      run.hits++;
       if (h.part === 'head') {
         stats.hs++;
+        run.hs++;
         sfx('head');
       } else sfx('body');
       marks.push({ x: sx, y: sy, life: 0.35, kill: true, miss: false });
+      if (forced) run.assisted = true;
       kill(h.bot, h.part);
     } else {
       addDecal(sx, sy);
@@ -338,6 +384,12 @@ export function createRange(cv: HTMLCanvasElement, o: Options): RangeController 
     b.anim = { type: 'fall', t: 0 };
     holding = false;
     openId = b.id; // blocks firing until React closes the section
+    if (run.status === 'running') {
+      if (!run.cleared.includes(b.id)) run.cleared.push(b.id);
+      if (run.cleared.length === BOTS.length) run.status = 'finished';
+      showTime();
+      emitRun();
+    }
     const dist = Math.round(Math.hypot(g.x, b.z, b.P + 1.4 - CAM));
     const meta = { part, dist, shot: stats.shots };
     later(() => o.onKill(b.id, meta), RM.matches ? 0 : 320);
@@ -345,7 +397,7 @@ export function createRange(cv: HTMLCanvasElement, o: Options): RangeController 
 
   function flickTo(id: BotId) {
     const b = byId(id);
-    if (openId || flick || !b.alive || b.k < 0.95) return;
+    if (!active || openId || flick || !b.alive || b.k < 0.95) return;
     flick = { b, sx: aim.x, sy: aim.y, t: 0, dur: RM.matches ? 0 : 0.22 };
   }
 
@@ -363,7 +415,7 @@ export function createRange(cv: HTMLCanvasElement, o: Options): RangeController 
     holding = false;
   };
   const onDown = (e: PointerEvent) => {
-    if (e.button !== 0 || flick || openId) return;
+    if (e.button !== 0 || !active || flick || openId) return;
     aim.x = e.clientX;
     aim.y = e.clientY;
     overUI = false;
@@ -644,6 +696,11 @@ export function createRange(cv: HTMLCanvasElement, o: Options): RangeController 
   let last = performance.now();
   function frame(now: number) {
     const dt = Math.min(0.05, (now - last) / 1000);
+    // Real time (capped so a backgrounded tab doesn't count) for the run clock.
+    if (run.status === 'running' && !openId) {
+      run.elapsedMs += Math.min(250, now - last);
+      showTime();
+    }
     last = now;
     t += dt;
 
@@ -698,7 +755,7 @@ export function createRange(cv: HTMLCanvasElement, o: Options): RangeController 
       }
     }
 
-    const showX = !openId && (!!flick || kbHold > 0 || tapShow > 0 || (mouseIn && !overUI));
+    const showX = active && !openId && (!!flick || kbHold > 0 || tapShow > 0 || (mouseIn && !overUI));
     const hov = showX ? hitTest(aim.x, aim.y) : null;
 
     ctx.save();
@@ -745,6 +802,15 @@ export function createRange(cv: HTMLCanvasElement, o: Options): RangeController 
       b.alive = true;
       b.anim = { type: 'rise', t: 0 };
       emitHud();
+    },
+    setActive(on) {
+      active = on;
+      if (!on) holding = false;
+    },
+    resetRun() {
+      run = emptyRun();
+      showTime();
+      emitRun();
     },
     playSfx: sfx,
     destroy() {

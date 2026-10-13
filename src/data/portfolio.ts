@@ -208,8 +208,8 @@ export const projectsData: Project[] = [
   {
     title: 'This Portfolio',
     description:
-      'This portfolio website is built with Next.js, Tailwind CSS, and Framer Motion. The homepage is an aim trainer drawn on a canvas, where each target bot opens a section; a classic scrolling version sits alongside it.',
-    tags: ['Next.js', 'Canvas', 'Tailwind CSS', 'Framer Motion'],
+      'A portfolio website built with Next.js, Tailwind CSS, and Framer Motion. Visitors give their name on a landing page, then enter an aim-trainer homepage drawn on a canvas, where each target bot opens a section and clearing all five posts a time to a shared leaderboard; a classic scrolling version sits alongside it.',
+    tags: ['Next.js', 'Canvas', 'Tailwind CSS', 'Framer Motion', 'Upstash Redis'],
     imageUrl: '/portfolio.png',
     githubUrl: 'https://github.com/tim-pipi/tim-pipi-portfolio',
     liveUrl: 'https://tim-pipi-portfolio.vercel.app/',

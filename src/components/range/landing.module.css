@@ -1,0 +1,152 @@
+/* Landing: a calm, centred greeting (clock, hello, name field) laid over a
+   blurred, darkened view of the live range behind it. */
+.landing {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: calc(24px + env(safe-area-inset-top, 0px)) 16px
+    calc(24px + env(safe-area-inset-bottom, 0px));
+  color: #fff;
+  font-family: var(--f-body);
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 35%, rgba(20, 25, 30, 0.35), rgba(8, 10, 13, 0.82) 75%),
+    linear-gradient(180deg, rgba(240, 83, 58, 0.1), rgba(8, 10, 13, 0.4));
+  -webkit-backdrop-filter: blur(10px) saturate(0.9);
+  backdrop-filter: blur(10px) saturate(0.9);
+  transition:
+    opacity 0.55s ease,
+    -webkit-backdrop-filter 0.55s ease,
+    backdrop-filter 0.55s ease;
+}
+.leaving {
+  opacity: 0;
+  -webkit-backdrop-filter: blur(0) saturate(1);
+  backdrop-filter: blur(0) saturate(1);
+  pointer-events: none;
+}
+.center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min(640px, 100%);
+}
+.clock {
+  margin: 0;
+  font-size: clamp(88px, 19vw, 176px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+}
+.greeting {
+  margin: 8px 0 0;
+  font-size: clamp(30px, 5.4vw, 52px);
+  font-weight: 500;
+  line-height: 1.15;
+  text-wrap: balance;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+}
+.intro {
+  margin: 18px 0 0;
+  max-width: 46ch;
+  font-size: clamp(15px, 2vw, 17px);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
+  text-wrap: pretty;
+}
+.form {
+  margin-top: clamp(40px, 9vh, 88px);
+  width: min(468px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.question {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 500;
+}
+.input {
+  margin-top: 18px;
+  padding: 6px 4px 10px;
+  border: 0;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.85);
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: clamp(24px, 3.4vw, 32px);
+  font-weight: 500;
+  text-align: center;
+  outline: none;
+  border-radius: 0;
+}
+.input:focus-visible {
+  border-bottom-color: var(--xhair);
+  box-shadow: 0 1.5px 0 var(--xhair);
+}
+.hint {
+  margin: 14px 0 0;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.6);
+}
+.hint kbd {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  padding: 1px 5px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-bottom-width: 2px;
+}
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 12px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+}
+.footer a,
+.linkBtn {
+  color: rgba(255, 255, 255, 0.8);
+  text-underline-offset: 3px;
+}
+.linkBtn {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.footer a:hover,
+.linkBtn:hover {
+  color: #fff;
+}
+.landing :focus-visible {
+  outline: 2px solid var(--xhair);
+  outline-offset: 3px;
+}
+.landing .input:focus-visible {
+  outline: none;
+}
+@media (max-height: 560px) {
+  .clock {
+    font-size: 72px;
+  }
+  .form {
+    margin-top: 24px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .landing {
+    transition: opacity 0.2s linear;
+  }
+}
