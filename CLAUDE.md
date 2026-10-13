@@ -21,6 +21,8 @@ Next.js 15 App Router + React 19 + Tailwind CSS v3 + Framer Motion. Single-page 
 
 **One route, composed sections.** `src/app/page.tsx` is the entire site: it renders `Header`, `Intro`, `SectionDivider`, and the content sections in display order. Reordering the page means reordering that JSX. `src/app/layout.tsx` is the only server component of note — it loads Geist/Geist_Mono via `next/font/google` (exposed as `--font-geist-sans` / `--font-geist-mono`), sets metadata, and mounts `<Analytics />` from `@vercel/analytics`.
 
+**`PORTFOLIO.md` is the source of truth for content.** Any content change must be made there first, then reflected in the components below (and vice versa — keep the two in sync).
+
 **Content is hardcoded data arrays inside the components.** Updating the portfolio's content means editing these, not a CMS or JSON file:
 - `projectsData` in `src/components/projects.tsx` (exported)
 - `experienceData` in `src/components/experience.tsx`
