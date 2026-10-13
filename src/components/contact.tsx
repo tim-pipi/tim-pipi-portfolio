@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Github, Linkedin } from 'lucide-react';
+import { profile } from '@/data/portfolio';
 
 export default function Contact() {
   return (
@@ -37,7 +38,7 @@ export default function Contact() {
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a
-          href="mailto:timothy.prasetio@gmail.com"
+          href={`mailto:${profile.email}`}
           className="group bg-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10"
         >
           <Mail className="opacity-70" size={20} />
@@ -46,7 +47,7 @@ export default function Contact() {
 
         <div className="flex gap-4">
           <a
-            href="https://github.com/tim-pipi"
+            href={profile.github}
             target="_blank"
             className="bg-white p-4 text-gray-700 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60"
           >
@@ -54,7 +55,7 @@ export default function Contact() {
           </a>
 
           <a
-            href="https://linkedin.com/in/timpipi"
+            href={profile.linkedin}
             target="_blank"
             className="bg-white p-4 text-gray-700 flex items-center gap-2 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer borderBlack dark:bg-white/10 dark:text-white/60"
           >

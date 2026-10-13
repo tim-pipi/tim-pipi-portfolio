@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Menu, X } from 'lucide-react';
+import Link from 'next/link';
+import { Crosshair, Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const navLinks = [
@@ -58,6 +59,12 @@ export default function Header() {
                 {item}
               </motion.a>
             ))}
+            <Link
+              href="/"
+              className="flex items-center gap-1.5 text-sm lg:text-base font-medium text-gray-900 dark:text-white"
+            >
+              <Crosshair size={16} /> Range
+            </Link>
           </nav>
 
           {/* Mobile menu button */}
@@ -86,6 +93,12 @@ export default function Header() {
                 {item}
               </a>
             ))}
+            <Link
+              href="/"
+              className="flex items-center gap-1.5 py-2 font-medium text-gray-900 dark:text-white"
+            >
+              <Crosshair size={16} /> Play the range
+            </Link>
           </motion.nav>
         )}
       </div>

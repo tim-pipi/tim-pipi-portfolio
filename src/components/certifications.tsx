@@ -3,14 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Award } from 'lucide-react';
-
-const certificationsData = [
-  'Software Engineering Focus Area',
-  'Japanese Language Proficiency (Intermediate)',
-  'Top Students for Digital Ethics and Data Privacy',
-  'Honour List of Student Tutors',
-  'Orbital - Apollo 11 (Advanced)',
-];
+import { certificationsData } from '@/data/portfolio';
 
 export default function Certifications() {
   return (

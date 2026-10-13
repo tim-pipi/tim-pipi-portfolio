@@ -3,24 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { GraduationCap } from 'lucide-react';
-
-const educationData = [
-  {
-    institution: 'National University of Singapore',
-    qualification: 'Bachelor of Computing in Computer Science',
-    date: 'Aug 2022 - May 2026',
-  },
-  {
-    institution: 'NUS College',
-    qualification: "Bachelor's Degree",
-    date: 'Aug 2022 - Aug 2026',
-  },
-  {
-    institution: 'Anglo-Chinese School (Independent)',
-    qualification: 'International Baccalaureate',
-    date: 'Feb 2020 - Nov 2021',
-  },
-];
+import { courseworkData, educationData } from '@/data/portfolio';
 
 export default function Education() {
   return (
@@ -59,6 +42,23 @@ export default function Education() {
             </div>
           </motion.div>
         ))}
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg text-left"
+        >
+          <h3 className="text-xl font-semibold mb-2">Selected coursework</h3>
+          <ul className="space-y-1 text-gray-700 dark:text-gray-300">
+            {courseworkData.map((course) => (
+              <li key={course.code}>
+                <span className="font-medium">{course.code}</span> ·{' '}
+                {course.name}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
       </div>
     </section>
   );
