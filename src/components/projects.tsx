@@ -81,7 +81,7 @@ export default function Projects() {
                       className="flex items-center gap-2 hover:text-gray-950 dark:hover:text-gray-200"
                     >
                       <Link size={20} />
-                      Live Demo
+                      {project.liveLabel ?? 'Live Demo'}
                     </a>
                   )}
                 </div>

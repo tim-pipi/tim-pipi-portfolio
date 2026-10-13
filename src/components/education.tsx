@@ -39,6 +39,13 @@ export default function Education() {
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 {education.date}
               </p>
+              {education.details && (
+                <ul className="mt-2 list-disc list-inside text-gray-700 dark:text-gray-300">
+                  {education.details.map((detail) => (
+                    <li key={detail}>{detail}</li>
+                  ))}
+                </ul>
+              )}
             </div>
           </motion.div>
         ))}

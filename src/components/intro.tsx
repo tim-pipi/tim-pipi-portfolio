@@ -40,9 +40,9 @@ export default function Intro() {
         <span className="font-bold">Computer Science</span> graduate of the{' '}
         <span className="font-bold">National University of Singapore</span>.{' '}
         <br />
-        <br />I enjoy building applications to solve{' '}
+        <br />I enjoy building systems that solve{' '}
         <span className="italic">real-life problems</span>. My current focus is{' '}
-        <span className="underline">Mobile Development 📱</span>.
+        <span className="underline">backend and real-time data infrastructure 📊</span>.
       </motion.h1>
 
       <motion.div

@@ -84,11 +84,24 @@ export default function Experience() {
         className="mt-8 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg text-left"
       >
         <h3 className="text-xl font-semibold mb-2">Leadership</h3>
-        <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1">
+        <ul className="text-gray-700 dark:text-gray-300 space-y-3">
           {leadershipData.map((item) => (
             <li key={item.title}>
-              <span className="font-medium">{item.title}</span>,{' '}
-              {item.organisation}
+              <p>
+                <span className="font-medium">{item.title}</span>,{' '}
+                {item.organisation}
+                {item.date && (
+                  <span className="text-gray-500 dark:text-gray-400">
+                    {' '}
+                    • {item.date}
+                  </span>
+                )}
+              </p>
+              {item.description && (
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  {item.description}
+                </p>
+              )}
             </li>
           ))}
         </ul>

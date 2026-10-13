@@ -6,10 +6,12 @@ export const profile = {
   shortName: 'Tim',
   role: 'Software Engineer',
   company: 'Rakuten Asia',
-  team: 'Ads',
+  team: 'Global Advertisement Tech',
   since: 'July 2026, full-time after interning on the same team',
   location: 'Singapore',
   hometown: 'Surabaya, Indonesia',
+  summary:
+    'Backend and real-time data infrastructure (Kafka, Apache Pinot, Spring Boot, Kubernetes)',
   interests: 'Distributed systems, data and platform engineering, SRE',
   hobbies:
     'Badminton, fingerstyle guitar, drawing, travelling, learning Japanese, and anything with a big drop: skydiving, roller coasters.',
@@ -35,7 +37,8 @@ export const experienceData: ExperienceItem[] = [
     company: 'Rakuten Asia',
     location: 'Singapore',
     description: [
-      'Joined the Ads team full-time after my internship, working on backend and data infrastructure',
+      "Develop and maintain the database service storing all item and shop data for Rakuten's ad platform, backing ad serving at millions of events per day across the Rakuten ecosystem",
+      'Cut Google Cloud Storage costs by 67%, from ~US$1,200 to ~US$400 per day (~US$290K/year saved), by implementing data retention policies, storage-class tiering and automated cleanup of stale data',
     ],
     date: 'Jul 2026 - Present',
     imageUrl: '',
@@ -45,8 +48,10 @@ export const experienceData: ExperienceItem[] = [
     company: 'Rakuten Asia',
     location: 'Singapore',
     description: [
-      'Built a real-time anomaly detection and KPI monitoring system: events stream through Kafka into Apache Pinot, ThirdEye flags anomalies, and a Next.js and Spring Boot dashboard shows them',
-      "Added a chat assistant on top with n8n workflows and Pinot's MCP server, so the team can ask about metrics in plain language",
+      'Built a real-time KPI anomaly-detection pipeline (Kafka → Apache Pinot → ThirdEye) monitoring the full ad funnel (requests, impressions, clicks, add-to-cart, conversions and ad sales), cutting time-to-detect for metric drops from hours to minutes',
+      'Developed a Next.js + Spring Boot monitoring dashboard for managers and engineers, replacing ad-hoc queries',
+      'Extended the system with a conversational AI assistant (n8n workflows + Pinot MCP server) that lets non-engineers query ad performance and generate reports in natural language',
+      'Received a full-time return offer and converted to Software Engineer on the same team',
     ],
     technologies: 'Kafka, Apache Pinot, ThirdEye, Next.js, Spring Boot, n8n, MCP',
     date: 'May 2025 - Jul 2026',
@@ -57,13 +62,25 @@ export const experienceData: ExperienceItem[] = [
     company: 'CareSense.ai',
     location: 'Singapore',
     description: [
-      'Developed a mobile application with Expo to improve healthcare through the help of an intelligent automated health coach',
-      'Led Android development for the healthcare application, implementing secure authentication and health data integration using Google APIs',
+      'Led Android development of a healthcare app with ~200 paying users, implementing secure Google OAuth sign-in and health-data sync via Google Fit and Health Connect',
+      "Built React Native (Expo) features integrating the app's AI health coach",
     ],
     technologies:
-      'React Native, Expo, Google APIs (Login, Fit, Health Connect), Android Development',
+      'React Native, Expo, Google APIs (OAuth, Fit, Health Connect), Android Development',
     date: 'Oct 2024 - May 2025',
     imageUrl: '/caresenseai.jpg',
+  },
+  {
+    title: 'Full-stack Developer Intern (Part-time)',
+    company: 'HomePal Technologies',
+    location: 'Singapore',
+    description: [
+      'Built an AI-enabled fall-detection app (Flutter, Django) with Firebase real-time alerts for elderly-care monitoring, deployed across 2 nursing homes',
+      'Built Raspberry Pi tooling (Tkinter, Dash) for ML training-data preparation, cutting processing time from ~12h to ~4h (3× faster)',
+    ],
+    technologies: 'Flutter, Django, Firebase, Tkinter, Dash',
+    date: 'Aug 2023 - Dec 2024',
+    imageUrl: '/homepal.jpg',
   },
   {
     title: 'Teaching Assistant',
@@ -78,23 +95,29 @@ export const experienceData: ExperienceItem[] = [
     date: 'Aug 2023 - May 2025',
     imageUrl: '',
   },
-  {
-    title: 'Full Stack Developer Intern',
-    company: 'HomePal',
-    location: 'Singapore',
-    description: [
-      'Built a mobile application using Flutter and Firebase to notify users of AI-detected falls, improving real-time alert efficiency for elderly care',
-      'Designed and developed a GUI using Tkinter for Raspberry Pi, streamlining data interaction for machine learning model training, resulting in a 300% increase in processing speed',
-      "Extended accessibility of Raspberry Pi's GUI by implementing a cross-platform web-based application using Python Dash, enhancing usability for diverse platforms",
-      'Collaborated with cross-functional teams to integrate AI algorithms into applications, enhancing the reliability and accuracy of fall detection systems',
-    ],
-    technologies: 'Flutter, Firebase, Tkinter, Dash',
-    date: 'Aug 2023 - Feb 2025',
-    imageUrl: '/homepal.jpg',
-  },
 ];
 
-export const leadershipData = [
+export type LeadershipItem = {
+  title: string;
+  organisation: string;
+  date?: string;
+  description?: string;
+};
+
+export const leadershipData: LeadershipItem[] = [
+  {
+    title: 'Vice President',
+    organisation: 'NUS Guitar Ensemble',
+    date: 'Apr 2023 - Apr 2024',
+    description:
+      'Led a 10-member executive committee; managed a $20,000 budget for concerts reaching 500+ attendees',
+  },
+  {
+    title: 'House Captain',
+    organisation: 'NUS College',
+    date: 'Aug 2022 - Aug 2023',
+    description: 'Ran 10 welfare initiatives for 150 residents',
+  },
   { title: 'Residential Assistant', organisation: 'NUS College' },
   {
     title: 'Team Captain',
@@ -109,6 +132,7 @@ export type Project = {
   imageUrl: string;
   githubUrl: string;
   liveUrl: string;
+  liveLabel?: string; // defaults to "Live Demo" / "Live"
   badge?: string;
 };
 
@@ -117,7 +141,7 @@ export const projectsData: Project[] = [
   {
     title: 'rizzedin.com',
     description:
-      'An AI dating platform for tech professionals, built at CursorHackSG 2025 and placed in the top 15 of ~500 participants.',
+      'An AI-powered matching platform for tech professionals, built at CursorHackSG 2025 and placed in the top 15 of ~500 participants.',
     tags: ['LinkedIn OAuth', 'Groq', 'Exa AI', 'Convex'],
     imageUrl: '',
     githubUrl: '',
@@ -136,18 +160,19 @@ export const projectsData: Project[] = [
   },
   {
     title: 'VCNet',
-    // TODO: add a one-line summary and the arXiv link
-    description: 'Research publication on arXiv.',
+    description:
+      'The Geometry of Cortical Computation: Manifold Disentanglement and Predictive Dynamics in VCNet. B. A. Hill, X. Zhang, T. P. Prasetio. arXiv:2508.02995.',
     tags: [],
     imageUrl: '',
     githubUrl: '',
-    liveUrl: '',
+    liveUrl: 'https://arxiv.org/abs/2508.02995',
+    liveLabel: 'Paper',
     badge: 'arXiv · 2025',
   },
   {
     title: 'PeerPrep',
     description:
-      'A collaborative coding platform designed for technical interview preparation, featuring real-time pair programming capabilities, video communication, and LeetCode-style coding problems. The platform includes a WebSocket-based pair programming system, question management interface, and user progress tracking system.',
+      'A collaborative technical-interview platform (Aug – Nov 2024): containerised microservices for real-time pair programming with video calls, with WebSocket-based collaborative editing and RabbitMQ for matchmaking and inter-service messaging.',
     tags: [
       'React',
       'TypeScript',
@@ -199,75 +224,65 @@ export const benchIdeas = [
 // `slot` is the loadout name the range homepage shows for each category.
 export const skillsData = [
   {
-    category: 'Programming Languages',
+    category: 'Languages',
     slot: 'Primary',
-    skills: [
-      'Java',
-      'Python',
-      'C++',
-      'JavaScript',
-      'TypeScript',
-      'Golang',
-      'Dart',
-      'SQL',
-    ],
+    skills: ['Java', 'Python', 'TypeScript', 'JavaScript', 'SQL', 'C++'],
   },
   {
-    category: 'Backend Development',
-    slot: 'Secondary',
-    skills: [
-      'Spring Boot',
-      'Django',
-      'Firebase',
-      'MongoDB',
-      'Supabase',
-      'Convex',
-    ],
-  },
-  {
-    category: 'Data & Streaming',
+    category: 'Data & Infrastructure',
     slot: 'Heavy',
-    skills: ['Kafka', 'Apache Pinot', 'ThirdEye', 'PySpark'],
-  },
-  {
-    category: 'Frontend Development',
-    slot: 'Sidearm',
     skills: [
-      'React',
-      'Next.js',
-      'HTML/CSS',
-      'Flutter',
-      'React Native',
-      'Expo',
-      'Tkinter',
-    ],
-  },
-  {
-    category: 'Tools & Infrastructure',
-    slot: 'Utility',
-    skills: [
-      'Git',
+      'Kafka',
+      'Apache Pinot',
+      'ThirdEye',
       'Docker',
       'Kubernetes',
       'Jenkins',
-      'Bash',
-      'PostgreSQL',
       'RabbitMQ',
       'WebSocket',
     ],
   },
   {
-    category: 'Agents & Automation',
+    category: 'Backend',
+    slot: 'Secondary',
+    skills: [
+      'Spring Boot',
+      'Django',
+      'PostgreSQL',
+      'MongoDB',
+      'Firebase',
+      'REST APIs',
+    ],
+  },
+  {
+    category: 'Frontend & Mobile',
+    slot: 'Sidearm',
+    skills: ['React', 'Next.js', 'Flutter', 'React Native'],
+  },
+  {
+    category: 'AI Tooling',
     slot: 'Ultimate',
-    skills: ['n8n', 'MCP servers', 'Groq', 'Exa AI'],
+    skills: ['n8n', 'Model Context Protocol (MCP)', 'LLM APIs'],
   },
 ];
 
-export const educationData = [
+export type EducationItem = {
+  institution: string;
+  qualification: string;
+  date: string;
+  details?: string[];
+};
+
+export const educationData: EducationItem[] = [
   {
     institution: 'National University of Singapore',
-    qualification: 'Bachelor of Computing in Computer Science',
+    qualification:
+      'Bachelor of Computing (Honours) in Computer Science, Highest Distinction',
     date: 'Aug 2022 - May 2026',
+    details: [
+      'GPA 4.55 / 5.00',
+      'ASEAN Undergraduate Scholarship (full ride)',
+    ],
   },
   {
     institution: 'NUS College',

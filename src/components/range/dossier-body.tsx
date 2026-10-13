@@ -20,10 +20,11 @@ function About() {
   return (
     <>
       <p className={s.lede}>
-        I&apos;m {profile.shortName}, a {profile.role.toLowerCase()} on the{' '}
-        {profile.team} team at {profile.company} in {profile.location}. I work on
-        backend and data infrastructure: pipelines that move a lot of events
-        quickly and still have to be right.
+        I&apos;m {profile.shortName}, a {profile.role.toLowerCase()} in{' '}
+        {profile.company}&apos;s {profile.team} department in{' '}
+        {profile.location}. I work on backend and real-time data
+        infrastructure: pipelines that move a lot of events quickly and still
+        have to be right.
       </p>
       <dl className={s.facts}>
         <dt>Role</dt>
@@ -36,6 +37,12 @@ function About() {
         <dd>
           {educationData[0].qualification}, {educationData[0].institution} ·{' '}
           {educationData[0].date}
+          {educationData[0].details && (
+            <span className={s.note}>
+              <br />
+              {educationData[0].details.join(' · ')}
+            </span>
+          )}
         </dd>
         <dt>Also</dt>
         <dd>
@@ -95,6 +102,13 @@ function Experience() {
         {leadershipData.map((item) => (
           <li key={item.title}>
             <strong>{item.title}</strong>, {item.organisation}
+            {item.date && <span className={s.note}> · {item.date.replace(' - ', ' – ')}</span>}
+            {item.description && (
+              <>
+                <br />
+                {item.description}
+              </>
+            )}
           </li>
         ))}
       </ul>
@@ -125,7 +139,7 @@ function Projects() {
                 )}
                 {project.liveUrl && (
                   <a href={project.liveUrl} target="_blank" rel="noreferrer">
-                    Live ↗
+                    {project.liveLabel ?? 'Live'} ↗
                   </a>
                 )}
               </p>
