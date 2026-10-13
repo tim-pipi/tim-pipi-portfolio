@@ -24,6 +24,8 @@ Next.js 15 App Router + React 19 + Tailwind CSS v3 + Framer Motion. Single-page 
 - `/classic` (`src/app/classic/page.tsx`) is the original scrolling page: it renders `Header`, `Intro`, `SectionDivider`, and the content sections in display order. Reordering that page means reordering that JSX.
 - `src/app/layout.tsx` is the only server component of note — it loads Geist/Geist_Mono (`--font-geist-sans` / `--font-geist-mono`), sets metadata, and mounts `<Analytics />` from `@vercel/analytics`.
 
+**`PORTFOLIO.md` is the source of truth for content.** Any content change must be made there first, then reflected in `src/data/portfolio.ts` and the prose components (and vice versa — keep the two in sync).
+
 **Content lives in `src/data/portfolio.ts`** and both routes read it, so they stay in sync: `profile` (name, role, links, email, hobbies), `experienceData`, `leadershipData`, `projectsData`, `benchIdeas`, `skillsData` (each category has a `slot` name shown in the range's Loadout), `educationData`, `courseworkData`, `certificationsData`. Some prose is still inline in the classic `about.tsx` / `intro.tsx` / `contact.tsx` and in `range/dossier-body.tsx`.
 
 Images referenced by those arrays are static files in `public/` (e.g. `/peerprep.png`, `/homepal.jpg`, plus `/CV.pdf` and `/profile-photo.png`). An empty `imageUrl`, `githubUrl` or `liveUrl` string is the sentinel for "none" — components branch on it.

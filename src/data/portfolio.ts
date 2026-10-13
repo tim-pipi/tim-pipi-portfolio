@@ -211,8 +211,8 @@ export const projectsData: Project[] = [
       'This portfolio website is built with Next.js, Tailwind CSS, and Framer Motion. The homepage is an aim trainer drawn on a canvas, where each target bot opens a section; a classic scrolling version sits alongside it.',
     tags: ['Next.js', 'Canvas', 'Tailwind CSS', 'Framer Motion'],
     imageUrl: '/portfolio.png',
-    githubUrl: 'https://github.com/tim-pipi/portfolio',
-    liveUrl: '',
+    githubUrl: 'https://github.com/tim-pipi/tim-pipi-portfolio',
+    liveUrl: 'https://tim-pipi-portfolio.vercel.app/',
   },
 ];
 
